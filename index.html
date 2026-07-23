@@ -1,0 +1,90 @@
+<div class="app-container" dir="rtl" id="app">
+  <!-- Header Section -->
+  <header class="app-header">
+    <div class="header-top">
+      <button class="icon-btn" onclick="openSettings()">⚙️</button>
+      <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+    </div>
+    <h1>OMNIBAND</h1>
+    <h2 id="subtitle">معصم وكيلك الذكي</h2>
+    <span class="badge" id="statusBadge">متصل الآن 🟢</span>
+  </header>
+
+  <!-- Profile Card -->
+  <section class="profile-card">
+    <div class="profile-info">
+      <span class="avatar">👤</span>
+      <div>
+        <h4 id="userLabel">المستخدم: <strong id="userName">عفراء</strong></h4>
+        <p id="contactLabel">جهة الطوارئ: <span id="contactName">أميرة</span> (<span id="contactPhone">+971501234567</span>)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Vitals Cards -->
+  <section class="vitals-grid">
+    <div class="vital-card">
+      <span class="icon">❤️</span>
+      <h3 id="hrLabel">نبضات القلب</h3>
+      <p class="value"><span id="heartRate">72</span> <small>BPM</small></p>
+    </div>
+
+    <div class="vital-card">
+      <span class="icon">🌡️</span>
+      <h3 id="tempLabel">حرارة الجسم</h3>
+      <p class="value"><span id="bodyTemp">36.6</span> <small>°C</small></p>
+    </div>
+
+    <div class="vital-card">
+      <span class="icon">🫁</span>
+      <h3 id="spo2Label">نسبة الأكسجين</h3>
+      <p class="value"><span id="bloodOxygen">98</span> <small>%</small></p>
+    </div>
+  </section>
+
+  <!-- Interactive Action Buttons -->
+  <section class="actions">
+    <button class="sos-btn" onclick="triggerSOS()" id="sosBtn">🚨 نداء استغاثة SOS</button>
+    <button class="action-btn" onclick="drinkWater()" id="waterBtn">💧 شربت ماء (تذكير)</button>
+    <button class="action-btn" onclick="toggleLED()" id="ledBtn">💡 إضاءة LED</button>
+  </section>
+
+  <!-- Features List Section -->
+  <section class="features-section">
+    <h3 id="featuresTitle">مميزات السوار:</h3>
+    <ul class="features-list" id="featuresList">
+      <li>📍 تحديد الموقع (AirTag)</li>
+      <li>🚨 نداء استغاثة SOS</li>
+      <li>💧 تذكير بشرب الماء</li>
+      <li>🌡️ قياس درجة حرارة الجسم</li>
+      <li>❤️ قياس نبضات القلب</li>
+      <li>🫁 قياس نسبة الأكسجين</li>
+      <li>🚶‍♂️ اكتشاف السقوط</li>
+      <li>📱 يحتوي على معلومات QR</li>
+      <li>💡 إضاءة LED</li>
+      <li>🌊 مقاوم للماء</li>
+      <li>🔋 بطارية تدوم لفترة طويلة</li>
+    </ul>
+  </section>
+
+  <!-- Settings / Emergency Contact Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-content">
+      <h3 id="modalTitle">إعدادات جهات الاتصال والمعلومات</h3>
+      
+      <label id="inputUserLabel">اسم المستخدم:</label>
+      <input type="text" id="inputName" value="عفراء" />
+
+      <label id="inputContactLabel">اسم جهة الطوارئ:</label>
+      <input type="text" id="inputContact" value="أميرة" />
+
+      <label id="inputPhoneLabel">رقم هاتف الطوارئ:</label>
+      <input type="text" id="inputPhone" value="+971501234567" />
+
+      <div class="modal-actions">
+        <button class="save-btn" onclick="saveSettings()" id="saveBtn">حفظ</button>
+        <button class="cancel-btn" onclick="closeSettings()" id="cancelBtn">إلغاء</button>
+      </div>
+    </div>
+  </div>
+</div>
