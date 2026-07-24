@@ -1,90 +1,401 @@
-<div class="app-container" dir="rtl" id="app">
-  <!-- Header Section -->
-  <header class="app-header">
-    <div class="header-top">
-      <button class="icon-btn" onclick="openSettings()">⚙️</button>
-      <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OMNIBAND - سوارك الذكي</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-red: #ef4444;
+      --accent-green: #22c55e;
+      --border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 3rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header / Hero */
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: rgba(37, 99, 235, 0.2);
+      color: #60a5fa;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 0.8rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Cards */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+
+    .card h2, .card h3 {
+      color: #ffffff;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Problems Section */
+    .problem-item {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .problem-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .problem-title {
+      font-weight: bold;
+      color: #fca5a5;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Features Grid */
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      background: rgba(255,255,255,0.05);
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+    }
+
+    /* Live Vitals Mockup */
+    .vital-box {
+      background: #090d16;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .vital-value {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--accent-green);
+      margin: 0.3rem 0;
+    }
+
+    /* Pricing Section */
+    .price-card {
+      text-align: center;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 2px solid var(--primary);
+    }
+
+    .price-tag {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ffffff;
+      margin: 1rem 0;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <span class="badge">صُمم وكيلك الذكي</span>
+      <h1>OMNIBAND</h1>
+      <p class="subtitle">السوار الذكي للحماية، المتابعة الصحية، والسلامة اليومية</p>
     </div>
-    <h1>OMNIBAND</h1>
-    <h2 id="subtitle">معصم وكيلك الذكي</h2>
-    <span class="badge" id="statusBadge">متصل الآن 🟢</span>
   </header>
 
-  <!-- Profile Card -->
-  <section class="profile-card">
-    <div class="profile-info">
-      <span class="avatar">👤</span>
-      <div>
-        <h4 id="userLabel">المستخدم: <strong id="userName">عفراء</strong></h4>
-        <p id="contactLabel">جهة الطوارئ: <span id="contactName">أميرة</span> (<span id="contactPhone">+971501234567</span>)</p>
+  <main class="container">
+
+    <!-- Section: Live Vitals Dashboard Preview -->
+    <div style="margin-top: 2rem;">
+      <h2 style="font-size: 1.4rem; margin-bottom: 1rem;">📊 متابعة الحشرات الحيوية المباشرة (عرض توضيحي)</h2>
+      <div class="grid-3">
+        <div class="vital-box">
+          <div>نبضات القلب ❤️</div>
+          <div class="vital-value" id="bpm-val">72 <small style="font-size:1rem">BPM</small></div>
+          <small style="color:var(--text-muted)">حالة طبيعية</small>
+        </div>
+        <div class="vital-box">
+          <div>نسبة الأكسجين 🫁</div>
+          <div class="vital-value" id="spo2-val">98%</div>
+          <small style="color:var(--text-muted)">مستوى ممتاز</small>
+        </div>
+        <div class="vital-box">
+          <div>حرارة الجسم 🌡️</div>
+          <div class="vital-value" id="temp-val">36.6°C</div>
+          <small style="color:var(--text-muted)">حرارة معتدلة</small>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Live Vitals Cards -->
-  <section class="vitals-grid">
-    <div class="vital-card">
-      <span class="icon">❤️</span>
-      <h3 id="hrLabel">نبضات القلب</h3>
-      <p class="value"><span id="heartRate">72</span> <small>BPM</small></p>
-    </div>
+    <div class="grid-2">
+      <!-- Section: Problems Handled -->
+      <div class="card">
+        <h2>⚠️ المشاكل التي يحلها السوار</h2>
+        
+        <div class="problem-item">
+          <div class="problem-title">المشكلة الأولى: ضياع الأطفال</div>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            تسجيل 14 بلاغ ضياع يومياً - إعادة 1271 طفلاً بفضل التقنيات المدمجة.
+          </p>
+        </div>
 
-    <div class="vital-card">
-      <span class="icon">🌡️</span>
-      <h3 id="tempLabel">حرارة الجسم</h3>
-      <p class="value"><span id="bodyTemp">36.6</span> <small>°C</small></p>
-    </div>
+        <div class="problem-item">
+          <div class="problem-title">المشكلة الثانية: الجفاف وارتفاع الحرارة</div>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            يضاعف طفح الكادميوم والإجهاد الحراري. إمكانية الحماية والتشجيع على شرب 1.5-1 لتر من الماء يومياً.
+          </p>
+        </div>
 
-    <div class="vital-card">
-      <span class="icon">🫁</span>
-      <h3 id="spo2Label">نسبة الأكسجين</h3>
-      <p class="value"><span id="bloodOxygen">98</span> <small>%</small></p>
-    </div>
-  </section>
+        <div class="problem-item">
+          <div class="problem-title">المشكلة الثالثة: الحالات الصحية الطارئة</div>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            تتبع الحالات الحرجة وتوفير تنبيهات سريعة خلال 60 ثانية إلى 15 دقيقة.
+          </p>
+        </div>
 
-  <!-- Interactive Action Buttons -->
-  <section class="actions">
-    <button class="sos-btn" onclick="triggerSOS()" id="sosBtn">🚨 نداء استغاثة SOS</button>
-    <button class="action-btn" onclick="drinkWater()" id="waterBtn">💧 شربت ماء (تذكير)</button>
-    <button class="action-btn" onclick="toggleLED()" id="ledBtn">💡 إضاءة LED</button>
-  </section>
+        <div class="problem-item">
+          <div class="problem-title">المشكلة الرابعة: السقوط المفاجئ</div>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            اكتشاف حالات السقوط بنسبة نجاح عالية وحماية كبار السن والأطفال.
+          </p>
+        </div>
+      </div>
 
-  <!-- Features List Section -->
-  <section class="features-section">
-    <h3 id="featuresTitle">مميزات السوار:</h3>
-    <ul class="features-list" id="featuresList">
-      <li>📍 تحديد الموقع (AirTag)</li>
-      <li>🚨 نداء استغاثة SOS</li>
-      <li>💧 تذكير بشرب الماء</li>
-      <li>🌡️ قياس درجة حرارة الجسم</li>
-      <li>❤️ قياس نبضات القلب</li>
-      <li>🫁 قياس نسبة الأكسجين</li>
-      <li>🚶‍♂️ اكتشاف السقوط</li>
-      <li>📱 يحتوي على معلومات QR</li>
-      <li>💡 إضاءة LED</li>
-      <li>🌊 مقاوم للماء</li>
-      <li>🔋 بطارية تدوم لفترة طويلة</li>
-    </ul>
-  </section>
+      <!-- Section: Pricing & Quick Actions -->
+      <div class="card price-card">
+        <h2>🏷️ السعر والطلب</h2>
+        <p style="color: var(--text-muted);">احصل على سوار OMNIBAND الذكي الآن</p>
+        
+        <div class="price-tag">$5 - $15</div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          * نطاق السعر المتوقع حسب الميزات المختارة
+        </p>
 
-  <!-- Settings / Emergency Contact Modal -->
-  <div class="modal-overlay" id="settingsModal">
-    <div class="modal-content">
-      <h3 id="modalTitle">إعدادات جهات الاتصال والمعلومات</h3>
-      
-      <label id="inputUserLabel">اسم المستخدم:</label>
-      <input type="text" id="inputName" value="عفراء" />
-
-      <label id="inputContactLabel">اسم جهة الطوارئ:</label>
-      <input type="text" id="inputContact" value="أميرة" />
-
-      <label id="inputPhoneLabel">رقم هاتف الطوارئ:</label>
-      <input type="text" id="inputPhone" value="+971501234567" />
-
-      <div class="modal-actions">
-        <button class="save-btn" onclick="saveSettings()" id="saveBtn">حفظ</button>
-        <button class="cancel-btn" onclick="closeSettings()" id="cancelBtn">إلغاء</button>
+        <button class="btn" onclick="alert('شكرًا لاهتمامك! سيتم فتح طلبات الشراء قريبًا.')">طلب السوار الآن</button>
+        <br>
+        <button class="btn" style="background: transparent; border: 1px solid var(--border);" onclick="triggerSOS()">
+          🚨 تجربة تنبيه الطوارئ (SOS)
+        </button>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- Section: Features List -->
+    <h2 style="margin-top: 2.5rem; margin-bottom: 0.5rem;">✨ مميزات السوار</h2>
+    <div class="grid-3">
+      <div class="feature-card">
+        <div class="feature-icon">📍</div>
+        <div>
+          <strong>تحديد الموقع</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">دعم AirTag والتتبع</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🚨</div>
+        <div>
+          <strong>نداء استغاثة</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">زر SOS فوري</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💧</div>
+        <div>
+          <strong>تذكير بالماء</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">تنبيهات شرب الماء</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌡️</div>
+        <div>
+          <strong>حرارة الجسم</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">قياس مستمر</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">❤️</div>
+        <div>
+          <strong>نبضات القلب</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">متابعة معدل النبض</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🫁</div>
+        <div>
+          <strong>نسبة الأكسجين</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">فحص SpO2</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🚶</div>
+        <div>
+          <strong>اكتشاف السقوط</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">حساسات حركية</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📲</div>
+        <div>
+          <strong>رمز QR</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">يحتوي على البيانات</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💡</div>
+        <div>
+          <strong>إضاءة LED</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">للرؤية الليلية</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌊</div>
+        <div>
+          <strong>مقاوم للماء</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">تحمل ظروف البيئة</div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔋</div>
+        <div>
+          <strong>بطارية طويلة</strong>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">تدوم لفترة طويلة</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Live vital values simulation logic
+    function updateVitals() {
+      const bpm = Math.floor(Math.random() * (78 - 70 + 1)) + 70;
+      const spo2 = Math.floor(Math.random() * (100 - 97 + 1)) + 97;
+      const temp = (36.5 + Math.random() * 0.3).toFixed(1);
+
+      document.getElementById('bpm-val').innerHTML = `${bpm} <small style="font-size:1rem">BPM</small>`;
+      document.getElementById('spo2-val').innerText = `${spo2}%`;
+      document.getElementById('temp-val').innerText = `${temp}°C`;
+    }
+
+    // Update numbers every 3 seconds
+    setInterval(updateVitals, 3000);
+
+    function triggerSOS() {
+      alert("🚨 تم إرسال نداء الاستغاثة SOS! تم مشاركة الموقع الجغرافي وإشعار جهات الاتصال.");
+    }
+  </script>
+</body>
+</html>
