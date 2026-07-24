@@ -1,401 +1,113 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlTag">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OMNIBAND - سوارك الذكي</title>
-  <style>
-    :root {
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent-red: #ef4444;
-      --accent-green: #22c55e;
-      --border: #334155;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding-bottom: 3rem;
-    }
-
-    /* Container */
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* Header / Hero */
-    header {
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .badge {
-      display: inline-block;
-      background-color: rgba(37, 99, 235, 0.2);
-      color: #60a5fa;
-      padding: 0.3rem 1rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: bold;
-      margin-bottom: 0.8rem;
-    }
-
-    h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 0.5rem;
-      letter-spacing: 1px;
-    }
-
-    .subtitle {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-    }
-
-    /* Grid Layouts */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
-      margin-top: 1.5rem;
-    }
-
-    /* Cards */
-    .card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    }
-
-    .card h2, .card h3 {
-      color: #ffffff;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    /* Problems Section */
-    .problem-item {
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .problem-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .problem-title {
-      font-weight: bold;
-      color: #fca5a5;
-      margin-bottom: 0.2rem;
-    }
-
-    /* Features Grid */
-    .feature-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 1.2rem;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .feature-icon {
-      font-size: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      width: 45px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-    }
-
-    /* Live Vitals Mockup */
-    .vital-box {
-      background: #090d16;
-      border: 1px solid var(--border);
-      padding: 1rem;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .vital-value {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: var(--accent-green);
-      margin: 0.3rem 0;
-    }
-
-    /* Pricing Section */
-    .price-card {
-      text-align: center;
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border: 2px solid var(--primary);
-    }
-
-    .price-tag {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #ffffff;
-      margin: 1rem 0;
-    }
-
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 0.8rem;
-      background-color: var(--primary);
-      color: white;
-      text-align: center;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s;
-      text-decoration: none;
-    }
-
-    .btn:hover {
-      background-color: var(--primary-hover);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 600px) {
-      h1 { font-size: 2rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omni Band</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <span class="badge">صُمم وكيلك الذكي</span>
-      <h1>OMNIBAND</h1>
-      <p class="subtitle">السوار الذكي للحماية، المتابعة الصحية، والسلامة اليومية</p>
-    </div>
-  </header>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">OMNI BAND</h1>
+            
+            <nav>
+                <ul>
+                    <li><a href="#features" data-i18n="nav_features">الْمُمَيِّزَات</a></li>
+                    <li><a href="#problems" data-i18n="nav_about">حَوْل</a></li>
+                    <li><button class="order-btn" data-i18n="btn_order">اطْلُب الآن</button></li>
+                </ul>
+            </nav>
 
-  <main class="container">
+            <!-- User Settings Controls -->
+            <div class="user-controls">
+                <!-- Language Selector -->
+                <select id="langSelect" class="lang-dropdown">
+                    <option value="ar">العربية (AR)</option>
+                    <option value="en">English (EN)</option>
+                </select>
 
-    <!-- Section: Live Vitals Dashboard Preview -->
-    <div style="margin-top: 2rem;">
-      <h2 style="font-size: 1.4rem; margin-bottom: 1rem;">📊 متابعة الحشرات الحيوية المباشرة (عرض توضيحي)</h2>
-      <div class="grid-3">
-        <div class="vital-box">
-          <div>نبضات القلب ❤️</div>
-          <div class="vital-value" id="bpm-val">72 <small style="font-size:1rem">BPM</small></div>
-          <small style="color:var(--text-muted)">حالة طبيعية</small>
+                <!-- Profile Badge Button -->
+                <div class="profile-badge" id="profileBtn">
+                    <img id="navAvatar" src="https://via.placeholder.com/40" alt="Avatar">
+                    <span id="navUsername">المستخدم</span>
+                </div>
+            </div>
         </div>
-        <div class="vital-box">
-          <div>نسبة الأكسجين 🫁</div>
-          <div class="vital-value" id="spo2-val">98%</div>
-          <small style="color:var(--text-muted)">مستوى ممتاز</small>
-        </div>
-        <div class="vital-box">
-          <div>حرارة الجسم 🌡️</div>
-          <div class="vital-value" id="temp-val">36.6°C</div>
-          <small style="color:var(--text-muted)">حرارة معتدلة</small>
-        </div>
-      </div>
-    </div>
+    </header>
 
-    <div class="grid-2">
-      <!-- Section: Problems Handled -->
-      <div class="card">
-        <h2>⚠️ المشاكل التي يحلها السوار</h2>
-        
-        <div class="problem-item">
-          <div class="problem-title">المشكلة الأولى: ضياع الأطفال</div>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            تسجيل 14 بلاغ ضياع يومياً - إعادة 1271 طفلاً بفضل التقنيات المدمجة.
-          </p>
+    <main>
+        <section class="hero">
+            <div class="hero-text">
+                <h2>OMNI BAND</h2>
+                <h3 data-i18n="hero_subtitle">(دعم وكيلك الذكي)</h3>
+                <p data-i18n="hero_desc">
+                    مرحبًا بكم في عصر جديد من حلول الرعاية والسلامة الذكية. اكتشفوا فوائد Omni Band.
+                </p>
+                <button class="order-btn" data-i18n="btn_explore">اكْتَشِف الْمَزِيد</button>
+            </div>
+            <div class="hero-image">
+                <ion-icon name="watch-outline" style="font-size: 150px; color: #f00;"></ion-icon>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2 data-i18n="features_title">مُمَيِّزَات السوار (Wristband Features)</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <ion-icon name="location-outline"></ion-icon>
+                    <h3 data-i18n="f_airtag">لِتَحْدِيد الْمَوْقِع Air Tag</h3>
+                </div>
+                <div class="feature-item">
+                    <ion-icon name="alert-circle-outline"></ion-icon>
+                    <h3 data-i18n="f_sos">نِدَاء اسْتِغَاثَة SOS</h3>
+                </div>
+                <div class="feature-item">
+                    <ion-icon name="water-outline"></ion-icon>
+                    <h3 data-i18n="f_water">تَذْكِير بِشُرْب الْمَاء</h3>
+                </div>
+                <div class="feature-item">
+                    <ion-icon name="thermometer-outline"></ion-icon>
+                    <h3 data-i18n="f_temp">قِيَاس دَرَجَة حَرَارَة الْجِسْم</h3>
+                </div>
+                <div class="feature-item">
+                    <ion-icon name="heart-half-outline"></ion-icon>
+                    <h3 id="heartRateLabel" data-i18n="f_heart">قِيَاس نَبَضَات الْقَلْب</h3>
+                </div>
+                <div class="feature-item">
+                    <ion-icon name="fitness-outline"></ion-icon>
+                    <h3 data-i18n="f_oxygen">قِيَاس نِسْبَة الْأُوكْسِجِين</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Window for Editing Profile -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2 data-i18n="modal_title">تعديل الملف الشخصي</h2>
+            
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="userNameInput" data-i18n="label_name">الاسم:</label>
+                    <input type="text" id="userNameInput" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userAvatarInput" data-i18n="label_photo">رابط الصورة الشخصية (URL):</label>
+                    <input type="url" id="userAvatarInput" placeholder="https://example.com/photo.jpg">
+                </div>
+
+                <button type="submit" class="order-btn" data-i18n="btn_save">حفظ التغييرات</button>
+            </form>
         </div>
-
-        <div class="problem-item">
-          <div class="problem-title">المشكلة الثانية: الجفاف وارتفاع الحرارة</div>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            يضاعف طفح الكادميوم والإجهاد الحراري. إمكانية الحماية والتشجيع على شرب 1.5-1 لتر من الماء يومياً.
-          </p>
-        </div>
-
-        <div class="problem-item">
-          <div class="problem-title">المشكلة الثالثة: الحالات الصحية الطارئة</div>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            تتبع الحالات الحرجة وتوفير تنبيهات سريعة خلال 60 ثانية إلى 15 دقيقة.
-          </p>
-        </div>
-
-        <div class="problem-item">
-          <div class="problem-title">المشكلة الرابعة: السقوط المفاجئ</div>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            اكتشاف حالات السقوط بنسبة نجاح عالية وحماية كبار السن والأطفال.
-          </p>
-        </div>
-      </div>
-
-      <!-- Section: Pricing & Quick Actions -->
-      <div class="card price-card">
-        <h2>🏷️ السعر والطلب</h2>
-        <p style="color: var(--text-muted);">احصل على سوار OMNIBAND الذكي الآن</p>
-        
-        <div class="price-tag">$5 - $15</div>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-          * نطاق السعر المتوقع حسب الميزات المختارة
-        </p>
-
-        <button class="btn" onclick="alert('شكرًا لاهتمامك! سيتم فتح طلبات الشراء قريبًا.')">طلب السوار الآن</button>
-        <br>
-        <button class="btn" style="background: transparent; border: 1px solid var(--border);" onclick="triggerSOS()">
-          🚨 تجربة تنبيه الطوارئ (SOS)
-        </button>
-      </div>
-    </div>
-
-    <!-- Section: Features List -->
-    <h2 style="margin-top: 2.5rem; margin-bottom: 0.5rem;">✨ مميزات السوار</h2>
-    <div class="grid-3">
-      <div class="feature-card">
-        <div class="feature-icon">📍</div>
-        <div>
-          <strong>تحديد الموقع</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">دعم AirTag والتتبع</div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🚨</div>
-        <div>
-          <strong>نداء استغاثة</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">زر SOS فوري</div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💧</div>
-        <div>
-          <strong>تذكير بالماء</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">تنبيهات شرب الماء</div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🌡️</div>
-        <div>
-          <strong>حرارة الجسم</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">قياس مستمر</div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">❤️</div>
-        <div>
-          <strong>نبضات القلب</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">متابعة معدل النبض</div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🫁</div>
-        <div>
-          <strong>نسبة الأكسجين</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">فحص SpO2</div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🚶</div>
-        <div>
-          <strong>اكتشاف السقوط</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">حساسات حركية</div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📲</div>
-        <div>
-          <strong>رمز QR</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">يحتوي على البيانات</div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💡</div>
-        <div>
-          <strong>إضاءة LED</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">للرؤية الليلية</div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🌊</div>
-        <div>
-          <strong>مقاوم للماء</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">تحمل ظروف البيئة</div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔋</div>
-        <div>
-          <strong>بطارية طويلة</strong>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">تدوم لفترة طويلة</div>
-        </div>
-      </div>
     </div>
 
-  </main>
-
-  <script>
-    // Live vital values simulation logic
-    function updateVitals() {
-      const bpm = Math.floor(Math.random() * (78 - 70 + 1)) + 70;
-      const spo2 = Math.floor(Math.random() * (100 - 97 + 1)) + 97;
-      const temp = (36.5 + Math.random() * 0.3).toFixed(1);
-
-      document.getElementById('bpm-val').innerHTML = `${bpm} <small style="font-size:1rem">BPM</small>`;
-      document.getElementById('spo2-val').innerText = `${spo2}%`;
-      document.getElementById('temp-val').innerText = `${temp}°C`;
-    }
-
-    // Update numbers every 3 seconds
-    setInterval(updateVitals, 3000);
-
-    function triggerSOS() {
-      alert("🚨 تم إرسال نداء الاستغاثة SOS! تم مشاركة الموقع الجغرافي وإشعار جهات الاتصال.");
-    }
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
