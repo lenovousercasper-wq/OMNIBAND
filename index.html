@@ -3,316 +3,443 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Omni Band Product Selector</title>
+  <title>OMNI BAND | Smart Safety Wristband</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      background-color: #ff6f59; /* Orangey Coral Background */
-      min-height: 100vh;
+      background-color: #0b0f17;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background-color: #111722;
+      border-bottom: 1px solid #1e293b;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #ff6b4a; /* Coral Brand Accent */
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #ff8c38; /* Orange Hover Accent */
+    }
+
+    /* Hero & Configurator Section */
+    .hero-section {
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 20px;
+      padding: 60px 20px;
     }
 
-    .container {
-      background-color: #0b1320; /* Dark inner container background */
+    .configurator-container {
+      display: flex;
+      flex-direction: row;
+      background-color: #151d2a;
       border-radius: 16px;
       padding: 40px;
-      max-width: 1000px;
-      width: 100%;
-      display: flex;
       gap: 40px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      color: #ffffff;
+      max-width: 950px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 1px solid #1e293b;
     }
 
-    /* Left Side: Product Preview */
-    .preview-card {
+    @media (max-width: 768px) {
+      .configurator-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* Left Side Preview */
+    .preview-section {
       flex: 1;
-      background-color: #121c2d;
-      border-radius: 12px;
-      padding: 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
+      background-color: #0f1622;
+      border-radius: 12px;
+      padding: 40px 20px;
+      border: 1px solid #1e293b;
+      width: 100%;
     }
 
     .band-display {
-      width: 240px;
-      height: 240px;
+      position: relative;
+      width: 210px;
+      height: 210px;
       border-radius: 50%;
-      border: 28px solid #ffffff; /* Dynamic outer band color */
+      border: 22px solid #ff6b4a; /* Coral Default */
       display: flex;
-      align-items: center;
       justify-content: center;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+      align-items: center;
+      box-shadow: 0 0 25px rgba(255, 107, 74, 0.4);
+      transition: all 0.3s ease;
     }
 
     .screen {
-      width: 110px;
-      height: 110px;
-      background-color: #000000;
+      width: 105px;
+      height: 105px;
+      background-color: #000;
       border-radius: 50%;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       text-align: center;
     }
 
-    .screen-gps {
-      color: #00c896;
+    .gps-status {
+      color: #10b981;
       font-size: 11px;
-      font-weight: 600;
-      margin-bottom: 4px;
+      font-weight: 700;
     }
 
-    .screen-brand {
-      color: #ffffff;
+    .brand-name {
+      font-size: 18px;
       font-weight: 800;
-      font-size: 16px;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
+      margin: 2px 0;
     }
 
-    .screen-batt {
-      color: #7a8b9e;
+    .battery-status {
+      color: #94a3b8;
       font-size: 10px;
-      margin-top: 4px;
     }
 
-    .size-indicator {
-      margin-top: 30px;
-      background-color: rgba(255, 255, 255, 0.08);
+    .size-badge {
+      margin-top: 25px;
+      background-color: #1e293b;
+      color: #ff8c38;
       padding: 8px 16px;
       border-radius: 20px;
       font-size: 13px;
-      color: #8fa0b5;
+      font-weight: 600;
     }
 
-    /* Right Side: Options & Details */
-    .details {
+    /* Right Side Options */
+    .details-section {
       flex: 1.2;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    .title {
+    h1 {
       font-size: 32px;
       font-weight: 800;
       letter-spacing: 1px;
-      margin-bottom: 8px;
     }
 
-    .subtitle {
-      color: #8fa0b5;
-      font-size: 15px;
-      line-height: 1.4;
-      margin-bottom: 30px;
+    .tagline {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-top: 6px;
+      margin-bottom: 20px;
     }
 
-    .section-divider {
-      border: none;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-bottom: 24px;
+    .divider {
+      height: 1px;
+      background-color: #1e293b;
+      margin-bottom: 20px;
     }
 
-    .option-label {
-      font-size: 15px;
+    .section-title {
+      font-size: 14px;
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
-    .selected-color-text {
-      color: #ffffff;
-      font-weight: bold;
+    .color-name {
+      color: #ff6b4a;
+      font-weight: 700;
     }
 
-    /* Color Swatches Grid */
-    .color-picker {
+    /* Swatches with Coral & Orange added */
+    .color-options {
       display: flex;
-      flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
     }
 
-    .color-swatch {
-      width: 32px;
-      height: 32px;
+    .swatch {
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       cursor: pointer;
       border: 2px solid transparent;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-      position: relative;
+      transition: transform 0.2s, border-color 0.2s;
     }
 
-    .color-swatch:hover {
+    .swatch:hover {
       transform: scale(1.1);
     }
 
-    .color-swatch.active {
+    .swatch.active {
       border-color: #ffffff;
-      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
     }
 
-    /* Size Buttons Grid */
-    .size-picker {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .swatch-coral  { background-color: #ff6b4a; }
+    .swatch-orange { background-color: #ff8c38; }
+    .swatch-teal   { background-color: #0d9488; }
+    .swatch-dark   { background-color: #272e3f; }
+    .swatch-white  { background-color: #e2e8f0; }
+    .swatch-red    { background-color: #f43f5e; }
+
+    /* Sizes */
+    .size-options {
+      display: flex;
       gap: 12px;
+      margin-bottom: 25px;
     }
 
     .size-card {
-      background-color: #121c2d;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      flex: 1;
+      background-color: #0f1622;
+      border: 1px solid #1e293b;
       border-radius: 8px;
-      padding: 16px 12px;
+      padding: 12px 8px;
       text-align: center;
       cursor: pointer;
-      transition: border-color 0.2s ease, background-color 0.2s ease;
+      transition: all 0.2s;
+    }
+
+    .size-card:hover {
+      border-color: #ff8c38;
     }
 
     .size-card.active {
-      border-color: #00c896;
-      background-color: rgba(0, 200, 150, 0.05);
+      border-color: #ff6b4a;
+      background-color: #261719;
     }
 
-    .size-name {
-      font-size: 15px;
+    .size-title {
+      font-size: 14px;
       font-weight: 600;
       margin-bottom: 4px;
     }
 
-    .size-range {
-      font-size: 12px;
-      color: #6c7d93;
+    .size-desc {
+      font-size: 11px;
+      color: #64748b;
     }
 
-    /* Mobile Responsiveness */
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-        padding: 24px;
-      }
+    .btn-action {
+      background: linear-gradient(135deg, #ff6b4a, #ff8c38);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 15px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-action:hover {
+      opacity: 0.9;
+    }
+
+    /* Overview Section (Merged content from OMNIBAND presentation) */
+    .overview-section {
+      padding: 60px 8%;
+      background-color: #0d131d;
+      border-top: 1px solid #1e293b;
+    }
+
+    .overview-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 40px;
+      color: #ffffff;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .feature-card {
+      background-color: #151d2a;
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid #1e293b;
+      border-left: 4px solid #ff6b4a; /* Accent bar */
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #ff8c38;
+    }
+
+    .feature-card p {
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #0b0f17;
+      color: #64748b;
+      font-size: 13px;
+      border-top: 1px solid #1e293b;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- Left Section: Preview -->
-    <div class="preview-card">
-      <div class="band-display" id="bandPreview" style="border-color: #ffffff;">
-        <div class="screen">
-          <span class="screen-gps">GPS: OK</span>
-          <span class="screen-brand">OMNI</span>
-          <span class="screen-batt">98% BATT</span>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">OMNI BAND</div>
+    <ul class="nav-links">
+      <li><a href="#customizer">Customizer</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#specs">Specs</a></li>
+    </ul>
+  </nav>
+
+  <!-- Product Customizer Hero -->
+  <section class="hero-section" id="customizer">
+    <div class="configurator-container">
+      <div class="preview-section">
+        <div class="band-display" id="bandDisplay">
+          <div class="screen">
+            <span class="gps-status">GPS: OK</span>
+            <span class="brand-name">OMNI</span>
+            <span class="battery-status">98% BATT</span>
+          </div>
         </div>
+        <div class="size-badge" id="selectedBadge">Selected Size: Medium (180 mm)</div>
       </div>
-      <div class="size-indicator" id="sizeIndicator">Selected Size: Medium (180 mm)</div>
+
+      <div class="details-section">
+        <h1>OMNI BAND</h1>
+        <p class="tagline">Smart safety wristband with GPS tracking and SOS emergency response.</p>
+        
+        <div class="divider"></div>
+
+        <div class="section-title">
+          Choose Rubber Color: <span class="color-name" id="colorLabel">Sunset Coral</span>
+        </div>
+        
+        <!-- Swatches with Coral and Orange added -->
+        <div class="color-options">
+          <div class="swatch swatch-coral active" onclick="selectColor('#ff6b4a', 'Sunset Coral', 'rgba(255, 107, 74, 0.4)', this)"></div>
+          <div class="swatch swatch-orange" onclick="selectColor('#ff8c38', 'Vibrant Orange', 'rgba(255, 140, 56, 0.4)', this)"></div>
+          <div class="swatch swatch-teal" onclick="selectColor('#0d9488', 'Teal', 'rgba(13, 148, 136, 0.4)', this)"></div>
+          <div class="swatch swatch-dark" onclick="selectColor('#272e3f', 'Dark Slate', 'rgba(39, 46, 63, 0.4)', this)"></div>
+          <div class="swatch swatch-white" onclick="selectColor('#e2e8f0', 'Pure White', 'rgba(255, 255, 255, 0.3)', this)"></div>
+          <div class="swatch swatch-red" onclick="selectColor('#f43f5e', 'Crimson Red', 'rgba(244, 63, 94, 0.4)', this)"></div>
+        </div>
+
+        <div class="section-title">Choose Band Size</div>
+        
+        <div class="size-options">
+          <div class="size-card" onclick="selectSize('Small', '150 mm', this)">
+            <div class="size-title">Small</div>
+            <div class="size-desc">140 - 165 mm</div>
+          </div>
+          <div class="size-card active" onclick="selectSize('Medium', '180 mm', this)">
+            <div class="size-title">Medium</div>
+            <div class="size-desc">165 - 190 mm</div>
+          </div>
+          <div class="size-card" onclick="selectSize('Large', '205 mm', this)">
+            <div class="size-title">Large</div>
+            <div class="size-desc">190 - 220 mm</div>
+          </div>
+        </div>
+
+        <button class="btn-action">Order OmniBand</button>
+      </div>
     </div>
+  </section>
 
-    <!-- Right Section: Product Controls -->
-    <div class="details">
-      <h1 class="title">OMNI BAND</h1>
-      <p class="subtitle">Smart safety wristband with GPS tracking and SOS emergency response.</p>
-      
-      <hr class="section-divider">
-
-      <!-- Color Selector -->
-      <div class="option-label">
-        Choose Rubber Color: <span class="selected-color-text" id="colorText">White</span>
+  <!-- Merged Overview Section -->
+  <section class="overview-section" id="overview">
+    <h2 class="overview-title">System Overview & Features</h2>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>Real-time GPS Tracking</h3>
+        <p>Instant precision location monitoring designed for immediate response and live safety status updates.</p>
       </div>
-      <div class="color-picker" id="colorPicker">
-        <!-- JS generates color swatches here -->
+      <div class="feature-card">
+        <h3>One-Touch SOS Alert</h3>
+        <p>Hold the emergency side triggers to instantly notify linked emergency contacts and send live location coordinates.</p>
       </div>
-
-      <hr class="section-divider">
-
-      <!-- Size Selector -->
-      <div class="option-label">Choose Band Size</div>
-      <div class="size-picker">
-        <div class="size-card" onclick="selectSize('Small', '140 - 165 mm', this)">
-          <div class="size-name">Small</div>
-          <div class="size-range">140 - 165 mm</div>
-        </div>
-        <div class="size-card active" onclick="selectSize('Medium', '165 - 190 mm', this)">
-          <div class="size-name">Medium</div>
-          <div class="size-range">165 - 190 mm</div>
-        </div>
-        <div class="size-card" onclick="selectSize('Large', '190 - 220 mm', this)">
-          <div class="size-name">Large</div>
-          <div class="size-range">190 - 220 mm</div>
-        </div>
+      <div class="feature-card">
+        <h3>Durable Silicone Casing</h3>
+        <p>Built with sweat-resistant, medical-grade rubber bands designed for all-day continuous wear and comfort.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Long Battery Life</h3>
+        <p>Optimized low-power display technology ensuring multi-day protection on a single magnetic charge.</p>
       </div>
     </div>
-  </div>
+  </section>
+
+  <footer>
+    <p>&copy; OMNI BAND Project. All rights reserved.</p>
+  </footer>
 
   <script>
-    // Requested Colors configuration
-    const colors = [
-      { name: 'Red', hex: '#E53E3E' },
-      { name: 'Orange', hex: '#DD6B20' },
-      { name: 'Yellow', hex: '#D69E2E' },
-      { name: 'Teal', hex: '#319795' },
-      { name: 'Blue', hex: '#3182CE' },
-      { name: 'Navy Blue', hex: '#1A365D' },
-      { name: 'Black', hex: '#1A202C' },
-      { name: 'White', hex: '#FFFFFF' },
-      { name: 'Purple', hex: '#805AD5' },
-      { name: 'Pink', hex: '#D53F8C' }
-    ];
-
-    const colorPickerContainer = document.getElementById('colorPicker');
-    const colorText = document.getElementById('colorText');
-    const bandPreview = document.getElementById('bandPreview');
-
-    // Populate Color Swatches
-    colors.forEach((color, index) => {
-      const swatch = document.createElement('div');
-      swatch.classList.add('color-swatch');
-      swatch.style.backgroundColor = color.hex;
-      swatch.title = color.name;
+    function selectColor(colorHex, colorName, glowColor, element) {
+      document.getElementById('colorLabel').innerText = colorName;
+      document.getElementById('colorLabel').style.color = colorHex;
       
-      // Default selection to White
-      if (color.name === 'White') {
-        swatch.classList.add('active');
-        colorText.style.color = color.hex;
-      }
+      const band = document.getElementById('bandDisplay');
+      band.style.borderColor = colorHex;
+      band.style.boxShadow = `0 0 25px ${glowColor}`;
 
-      // Border adjustments for white color swatch readability
-      if (color.name === 'White') {
-        swatch.style.border = '1px solid rgba(255,255,255,0.4)';
-      }
-
-      swatch.addEventListener('click', () => {
-        document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
-        swatch.classList.add('active');
-        
-        // Update label and band border color
-        colorText.textContent = color.name;
-        colorText.style.color = color.hex === '#FFFFFF' ? '#FFFFFF' : color.hex;
-        bandPreview.style.borderColor = color.hex;
-      });
-
-      colorPickerContainer.appendChild(swatch);
-    });
-
-    // Size Selector Functionality
-    function selectSize(sizeName, range, element) {
-      document.querySelectorAll('.size-card').forEach(card => card.classList.remove('active'));
+      document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
       element.classList.add('active');
-      document.getElementById('sizeIndicator').textContent = `Selected Size: ${sizeName} (${range.split('-')[1].trim()})`;
+    }
+
+    function selectSize(sizeName, mm, element) {
+      document.getElementById('selectedBadge').innerText = `Selected Size: ${sizeName} (${mm})`;
+
+      document.querySelectorAll('.size-card').forEach(c => c.classList.remove('active'));
+      element.classList.add('active');
     }
   </script>
 </body>
