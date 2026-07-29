@@ -1,46 +1,74 @@
+let currentSelectedColor = 'Teal Green';
+let currentSelectedSize = 'Medium (165-190 mm)';
+
 /**
- * Redirects the user to the OMNIBAND order/landing page.
+ * Redirects user to external store landing page.
  */
 function goToOrderPage() {
     window.location.href = "https://lenovousercasper-wq.github.io/OMNIBAND/";
 }
 
 /**
- * Changes the color of the wristband visual and updates the label name.
- * @param {string} colorHex - Hex color code for the border.
- * @param {string} colorName - Name of the chosen color.
- * @param {HTMLElement} element - The clicked swatch element.
+ * Updates color strap visual dynamically.
  */
 function selectColor(colorHex, colorName, element) {
-    const bandGraphic = document.getElementById('bandGraphic');
-    if (bandGraphic) {
-        bandGraphic.style.borderColor = colorHex;
+    const strap = document.getElementById('bandStrap');
+    if (strap) {
+        strap.style.borderColor = colorHex;
+        // Update Glow Color
+        strap.style.boxShadow = `0 0 35px ${colorHex}66, inset 0 4px 8px rgba(255,255,255,0.3), inset 0 -6px 12px rgba(0,0,0,0.6)`;
     }
 
-    const colorLabel = document.getElementById('colorLabel');
-    if (colorLabel) {
-        colorLabel.textContent = colorName;
-    }
+    currentSelectedColor = colorName;
+    document.getElementById('colorLabel').textContent = colorName;
 
-    document.querySelectorAll('.swatch').forEach(swatch => {
-        swatch.classList.remove('active');
-    });
+    document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
     element.classList.add('active');
+
+    updateSummaryText();
 }
 
 /**
- * Changes the active size indicator text and selection state.
- * @param {string} sizeText - Description of the size selected.
- * @param {HTMLElement} element - The clicked size button element.
+ * Updates band size option dynamically.
  */
-function selectSize(sizeText, element) {
-    const sizeDisplay = document.getElementById('sizeDisplay');
-    if (sizeDisplay) {
-        sizeDisplay.textContent = 'Selected Size: ' + sizeText;
-    }
+function selectSize(sizeTitle, sizeRange, element) {
+    currentSelectedSize = `${sizeTitle} (${sizeRange})`;
+    document.getElementById('sizeLabel').textContent = currentSelectedSize;
 
-    document.querySelectorAll('.size-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
     element.classList.add('active');
+
+    updateSummaryText();
+}
+
+/**
+ * Updates lower summary bar text.
+ */
+function updateSummaryText() {
+    const summary = document.getElementById('sizeDisplay');
+    if (summary) {
+        summary.textContent = `Selected: ${currentSelectedColor} / ${currentSelectedSize}`;
+    }
+}
+
+/**
+ * Switches screen stat modes (Heart rate, SpO2, SOS).
+ */
+function updateScreenMode(mode, btnElement) {
+    const mainStat = document.getElementById('screenStat');
+    const subStat = document.getElementById('screenSub');
+
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    if (mode === 'heart') {
+        mainStat.innerHTML = '72 <span>BPM</span>';
+        subStat.textContent = 'Heart Rate: Normal';
+    } else if (mode === 'spo2') {
+        mainStat.innerHTML = '99% <span>SpO2</span>';
+        subStat.textContent = 'Oxygen Level: Optimal';
+    } else if (mode === 'sos') {
+        mainStat.innerHTML = '<span style="color:#ef4444;">ALERT</span>';
+        subStat.textContent = 'SOS Signal Active';
+    }
 }
