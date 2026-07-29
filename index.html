@@ -3,133 +3,568 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBAND — Next-Gen Smart Safety Wristband</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>OmniBand – Smart Emergency Wristband</title>
+    <style>
+        /* --- CSS VARIABLES & STYLES --- */
+        :root {
+            --primary: #008080; /* Teal primary */
+            --primary-hover: #006666;
+            --primary-light: #e6f2f2;
+            --accent: #ff4d4d; /* Emergency Red */
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        /* --- HEADER & HERO --- */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #004d4d 100%);
+            color: var(--white);
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-content p.subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .team-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        /* --- NAVIGATION TABS --- */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* --- CONTAINER & TABS LAYOUT --- */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 0;
+            padding: 0 20px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- CARDS & GRID --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card h2, .card h3 {
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .card-highlight {
+            border-left: 5px solid var(--primary);
+        }
+
+        .card-alert {
+            border-left: 5px solid var(--accent);
+        }
+
+        /* --- FEATURES LIST --- */
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* --- WRISTBAND MOCKUP INTERACTION --- */
+        .mockup-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-light);
+            border-radius: var(--radius);
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .wristband {
+            width: 240px;
+            height: 90px;
+            background: var(--primary);
+            border-radius: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2), var(--shadow-lg);
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .screen {
+            width: 100px;
+            height: 70px;
+            background: var(--dark);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 0.75rem;
+            border: 2px solid #374151;
+            padding: 4px;
+        }
+
+        .sos-btn {
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            font-weight: bold;
+            font-size: 0.7rem;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(255, 77, 77, 0.6);
+            margin-top: 4px;
+            transition: transform 0.1s ease;
+        }
+
+        .sos-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* --- BRAINSTORMING COMPARISON TABLE --- */
+        .comparison-card {
+            border-top: 4px solid var(--gray-300);
+        }
+
+        .comparison-card.selected {
+            border-top: 4px solid var(--primary);
+            background: #f0fdfa;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .tag-pro { background: #dcfce7; color: #166534; }
+        .tag-con { background: #fee2e2; color: #991b1b; }
+
+        /* --- STATS / METRICS --- */
+        .stat-box {
+            text-align: center;
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        /* --- TIMELINE / STEPS --- */
+        .step-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .step-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .step-number {
+            background: var(--primary);
+            color: var(--white);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        /* --- MOBILE ADJUSTMENTS --- */
+        @media (max-width: 600px) {
+            .nav-tabs { flex-direction: column; }
+            .tab-btn { padding: 12px; text-align: center; }
+            .header-content h1 { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
-    <header class="navbar">
-        <div class="nav-container">
-            <a href="#" class="brand-logo">
-                <span class="logo-icon">⚡</span> OMNI<span>BAND</span>
-            </a>
-            <nav class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#specs">Specifications</a>
-                <a href="#about">About</a>
-            </nav>
-            <div class="nav-actions">
-                <button class="nav-cart-btn">🛒 <span>0</span></button>
+    <!-- HERO HEADER -->
+    <header>
+        <div class="header-content">
+            <h1>OmniBand</h1>
+            <p class="subtitle">Smart Emergency Wristband</p>
+            <div class="team-badge">
+                <strong>Team:</strong> Afra • Mahra • Dana
             </div>
         </div>
     </header>
 
-    <main class="main-wrapper">
-        <div class="product-container">
+    <!-- TAB NAVIGATION -->
+    <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('overview')">Project Overview</button>
+        <button class="tab-btn" onclick="switchTab('brainstorming')">Brainstorming & Design</button>
+        <button class="tab-btn" onclick="switchTab('testing')">Testing & Future</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- TAB 1: PROJECT OVERVIEW -->
+        <div id="overview" class="tab-content active">
             
-            <!-- Left Side: Interactive 3D Product Showcase -->
-            <div class="preview-box">
-                <span class="badge-tag">NEW GENERATION</span>
+            <!-- Interactive Device Demo -->
+            <div class="mockup-wrapper">
+                <h2>Interactive Prototype Concept</h2>
+                <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 4px;">Teal Rubber Design • Waterproof • Soft Ergonomics</p>
                 
-                <div class="wristband-3d-wrapper">
-                    <!-- Outer Silicone Strap Ring -->
-                    <div class="wristband-strap" id="bandStrap">
-                        <div class="strap-texture"></div>
-                        <!-- Inner Digital Module -->
-                        <div class="band-core">
-                            <div class="glass-reflection"></div>
-                            <div class="screen-content">
-                                <div class="status-bar">
-                                    <span class="signal-dot"></span>
-                                    <span>GPS LIVE</span>
-                                </div>
-                                <div class="main-stat" id="screenStat">72 <span>BPM</span></div>
-                                <div class="sub-stat" id="screenSub">Heart Rate: Normal</div>
-                            </div>
-                        </div>
+                <div class="wristband">
+                    <div class="screen">
+                        <span id="screen-text">GPS: Active</span>
+                        <button class="sos-btn" onclick="triggerAlert()">SOS</button>
                     </div>
                 </div>
-
-                <!-- Interactive Display Controls -->
-                <div class="screen-modes">
-                    <button class="mode-btn active" onclick="updateScreenMode('heart', this)">❤️ Heart</button>
-                    <button class="mode-btn" onclick="updateScreenMode('spo2', this)">🫁 SpO2</button>
-                    <button class="mode-btn" onclick="updateScreenMode('sos', this)">🚨 SOS</button>
-                </div>
-
-                <div class="selected-summary" id="sizeDisplay">Selected: Teal Green / Medium (165-190 mm)</div>
+                <small style="color: var(--gray-600);">Click the SOS button to simulate an emergency alert</small>
             </div>
 
-            <!-- Right Side: Customization & Checkout Panel -->
-            <div class="product-panel">
-                <div class="rating-row">
-                    <span class="stars">★★★★★</span>
-                    <span class="rating-text">4.9/5 (128 reviews)</span>
+            <div class="grid-2">
+                <div class="card card-alert">
+                    <h3>The Problem</h3>
+                    <p>Many children, elderly people, and individuals with medical conditions may get lost or require urgent assistance. During emergencies, it is often difficult for bystanders or first responders to identify who they are or how to help them quickly.</p>
                 </div>
 
-                <h1>OMNI BAND Smart Safety Wristband</h1>
-                <p class="subtitle">Designed for health tracking, rapid location identification, and instant SOS alert transmission.</p>
-
-                <div class="price-row">
-                    <span class="current-price">Dhs 249</span>
-                    <span class="old-price">Dhs 320</span>
-                    <span class="save-badge">Save 22%</span>
+                <div class="card card-highlight">
+                    <h3>Our Solution</h3>
+                    <p>OmniBand is a smart wearable wristband designed for maximum safety. It stores critical medical information, personal emergency contacts, and live GPS location, offering instant access and alerts when every second counts.</p>
                 </div>
+            </div>
 
-                <!-- Color Selector -->
-                <div class="option-group">
-                    <div class="option-header">
-                        <label>Strap Color:</label>
-                        <span id="colorLabel" class="option-value">Teal Green</span>
+            <div class="card" style="margin-bottom: 30px;">
+                <h3>Key Objectives</h3>
+                <div class="grid-2" style="margin-bottom: 0;">
+                    <ul class="feature-list">
+                        <li>Improve overall personal safety</li>
+                        <li>Help emergency responders act faster</li>
+                    </ul>
+                    <ul class="feature-list">
+                        <li>Enable rapid identification during crises</li>
+                        <li>Provide families with continuous peace of mind</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Core Features</h3>
+                <div class="grid-3" style="margin-bottom: 0;">
+                    <div>
+                        <strong style="color: var(--primary);">Emergency SOS Button</strong>
+                        <p style="font-size: 0.9rem; color: var(--gray-600);">Sends immediate location alerts to saved contacts.</p>
                     </div>
-                    <div class="swatches">
-                        <div class="swatch active" style="--swatch-color: #0d9488;" onclick="selectColor('#0d9488', 'Teal Green', this)"></div>
-                        <div class="swatch" style="--swatch-color: #1e293b;" onclick="selectColor('#1e293b', 'Midnight Black', this)"></div>
-                        <div class="swatch" style="--swatch-color: #f1f5f9;" onclick="selectColor('#f1f5f9', 'Glacier White', this)"></div>
-                        <div class="swatch" style="--swatch-color: #ef4444;" onclick="selectColor('#ef4444', 'Signal Red', this)"></div>
+                    <div>
+                        <strong style="color: var(--primary);">GPS Tracking</strong>
+                        <p style="font-size: 0.9rem; color: var(--gray-600);">Provides accurate real-time location sharing.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--primary);">Medical Data Storage</strong>
+                        <p style="font-size: 0.9rem; color: var(--gray-600);">Holds allergies, conditions, and emergency contact details.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--primary);">Comfortable Strap</strong>
+                        <p style="font-size: 0.9rem; color: var(--gray-600);">Waterproof, durable teal rubber band.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--primary);">Long-Lasting Battery</strong>
+                        <p style="font-size: 0.9rem; color: var(--gray-600);">Optimized power consumption for multi-day use.</p>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Size Selector -->
-                <div class="option-group">
-                    <div class="option-header">
-                        <label>Band Size:</label>
-                        <span id="sizeLabel" class="option-value">Medium (165-190 mm)</span>
-                    </div>
-                    <div class="sizes">
-                        <div class="size-btn" onclick="selectSize('Small', '140-165 mm', this)">
-                            <strong>Small</strong>
-                            <span>140–165 mm</span>
-                        </div>
-                        <div class="size-btn active" onclick="selectSize('Medium', '165-190 mm', this)">
-                            <strong>Medium</strong>
-                            <span>165–190 mm</span>
-                        </div>
-                        <div class="size-btn" onclick="selectSize('Large', '190-220 mm', this)">
-                            <strong>Large</strong>
-                            <span>190–220 mm</span>
-                        </div>
-                    </div>
+        <!-- TAB 2: BRAINSTORMING & DESIGN -->
+        <div id="brainstorming" class="tab-content">
+            
+            <h2 style="margin-bottom: 20px; color: var(--primary);">Concept Evaluation</h2>
+            <div class="grid-3">
+                <div class="card comparison-card">
+                    <h3>Idea 1: Safety Necklace</h3>
+                    <span class="tag tag-pro">Pros</span> Easy to wear, stores data.<br>
+                    <span class="tag tag-con">Cons</span> Easily lost, unsafe for sports.
                 </div>
+                <div class="card comparison-card">
+                    <h3>Idea 2: Emergency Badge</h3>
+                    <span class="tag tag-pro">Pros</span> Highly visible to others.<br>
+                    <span class="tag tag-con">Cons</span> Can fall off, limited space for tech.
+                </div>
+                <div class="card comparison-card selected">
+                    <h3>Idea 3: OmniBand (Chosen)</h3>
+                    <span class="tag tag-pro">Pros</span> Comfortable, secure, multi-featured.<br>
+                    <span class="tag tag-con">Cons</span> Requires charging battery.
+                </div>
+            </div>
 
-                <!-- Primary Order CTA -->
-                <button class="order-btn" onclick="goToOrderPage()">
-                    <span>Order Now</span>
-                    <span class="btn-arrow">→</span>
-                </button>
+            <h2 style="margin-bottom: 20px; color: var(--primary);">Design Progression</h2>
+            <div class="step-timeline">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <h4>Sketch 1</h4>
+                    <p style="font-size: 0.85rem; color: var(--gray-600); margin-top: 8px;">Basic wristband with a simple display screen and small alert button.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <h4>Sketch 2</h4>
+                    <p style="font-size: 0.85rem; color: var(--gray-600); margin-top: 8px;">Added a larger display screen with an integrated GPS icon.</p>
+                </div>
+                <div class="step-item" style="border: 2px solid var(--primary);">
+                    <div class="step-number">3</div>
+                    <h4>Final Sketch</h4>
+                    <p style="font-size: 0.85rem; color: var(--gray-600); margin-top: 8px;">Modern teal rubber band with prominent SOS button and clean UI layout.</p>
+                </div>
+            </div>
 
-                <div class="guarantee-row">
-                    <span>🔒 Safe Checkout</span>
-                    <span>🚚 Free UAE Shipping</span>
-                    <span>🛡️ 2-Year Warranty</span>
+            <div class="card" style="margin-top: 30px;">
+                <h3>Design Challenges & Solutions</h3>
+                <div class="grid-2" style="margin-bottom: 0; margin-top: 16px;">
+                    <div>
+                        <strong style="color: var(--accent);">Challenges Encountered:</strong>
+                        <ul style="margin-left: 20px; font-size: 0.95rem; margin-top: 8px;">
+                            <li>Selecting the most critical features without clutter.</li>
+                            <li>Keeping operation simple under panic situations.</li>
+                            <li>Designing an aesthetically pleasing, modern look.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color: var(--primary);">How We Solved Them:</strong>
+                        <ul style="margin-left: 20px; font-size: 0.95rem; margin-top: 8px;">
+                            <li>Collaborated to merge the best ideas into one concept.</li>
+                            <li>Eliminated non-essential features for clarity.</li>
+                            <li>Iterated on visual designs using team feedback.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
         </div>
-    </main>
 
-    <script src="script.js"></script>
+        <!-- TAB 3: TESTING & FUTURE -->
+        <div id="testing" class="tab-content">
+            
+            <h2 style="margin-bottom: 20px; color: var(--primary);">Testing Results (10 Respondents)</h2>
+            <div class="grid-3">
+                <div class="stat-box">
+                    <div class="stat-number">9/10</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">Found it Easy to Understand</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">8/10</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">Liked the Modern Aesthetics</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">10/10</div>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">Located SOS Button Instantly</p>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Team Reflection</h3>
+                    <strong style="color: var(--primary);">What Went Well</strong>
+                    <p style="font-size: 0.9rem; color: var(--gray-600); margin-bottom: 12px;">Great teamwork, creative ideation, and clear problem-solving process.</p>
+                    
+                    <strong style="color: var(--primary);">Key Learnings</strong>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">Understanding user-centric design principles and how wearable tech improves safety.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Future Roadmap</h3>
+                    <ul class="feature-list">
+                        <li>Automated Fall Detection</li>
+                        <li>Continuous Heart Rate Monitoring</li>
+                        <li>Two-Way Emergency Voice Calling</li>
+                        <li>Built-in Voice Assistant</li>
+                        <li>Solar-Assisted Battery Charging</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card card-highlight">
+                <h3>Conclusion</h3>
+                <p>OmniBand is designed to improve safety by helping people get assistance quickly during emergencies. It combines useful technology with a simple, comfortable design, making it suitable for children, elderly people, and anyone who wants extra protection.</p>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>OmniBand Documentation Website • Designed by Afra, Mahra, and Dana</p>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Tab Switcher Logic
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Deactivate all tab buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // Show current tab & set active button
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // SOS Button Simulator Function
+        function triggerAlert() {
+            const screenText = document.getElementById('screen-text');
+            screenText.innerText = "ALERT SENT!";
+            screenText.style.color = "#ff4d4d";
+            screenText.style.fontWeight = "bold";
+
+            alert("🚨 EMERGENCY ALERT SIMULATION\n\n- SOS Signal Dispatched\n- Live GPS Location Shared\n- Emergency Contacts Notified");
+
+            setTimeout(() => {
+                screenText.innerText = "GPS: Active";
+                screenText.style.color = "#ffffff";
+                screenText.style.fontWeight = "normal";
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
