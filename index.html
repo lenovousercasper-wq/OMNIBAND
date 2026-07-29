@@ -3,63 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNI BAND - Smart Emergency Wristband</title>
+    <title>OMNIBAND — Next-Gen Smart Safety Wristband</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <!-- Interactive Preview -->
-        <div class="preview-box">
-            <div class="wristband-graphic" id="bandGraphic">
-                <div class="screen">
-                    <span style="font-size: 0.7rem; color: var(--primary-teal);">GPS: OK</span>
-                    <strong style="font-size: 1rem; margin: 2px 0;">OMNI</strong>
-                    <span style="font-size: 0.65rem; color: #888;">98% BATT</span>
-                </div>
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand-logo">
+                <span class="logo-icon">⚡</span> OMNI<span>BAND</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#specs">Specifications</a>
+                <a href="#about">About</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="nav-cart-btn">🛒 <span>0</span></button>
             </div>
-            <div class="size-tag" id="sizeDisplay">Selected Size: Small (140 mm)</div>
         </div>
+    </header>
 
-        <!-- Customization & Order Panel -->
-        <div class="product-panel">
-            <h1>OMNI BAND</h1>
-            <p class="subtitle">Smart safety wristband with GPS tracking and SOS emergency response.</p>
+    <main class="main-wrapper">
+        <div class="product-container">
+            
+            <!-- Left Side: Interactive 3D Product Showcase -->
+            <div class="preview-box">
+                <span class="badge-tag">NEW GENERATION</span>
+                
+                <div class="wristband-3d-wrapper">
+                    <!-- Outer Silicone Strap Ring -->
+                    <div class="wristband-strap" id="bandStrap">
+                        <div class="strap-texture"></div>
+                        <!-- Inner Digital Module -->
+                        <div class="band-core">
+                            <div class="glass-reflection"></div>
+                            <div class="screen-content">
+                                <div class="status-bar">
+                                    <span class="signal-dot"></span>
+                                    <span>GPS LIVE</span>
+                                </div>
+                                <div class="main-stat" id="screenStat">72 <span>BPM</span></div>
+                                <div class="sub-stat" id="screenSub">Heart Rate: Normal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Color Selection -->
-            <div class="option-group">
-                <div class="option-label">Choose Rubber Color: <span id="colorLabel">Teal Green</span></div>
-                <div class="swatches">
-                    <div class="swatch active" style="background: #0d9488;" onclick="selectColor('#0d9488', 'Teal Green', this)"></div>
-                    <div class="swatch" style="background: #1e293b; border: 1px solid #475569;" onclick="selectColor('#1e293b', 'Matte Black', this)"></div>
-                    <div class="swatch" style="background: #e2e8f0;" onclick="selectColor('#e2e8f0', 'Pure White', this)"></div>
-                    <div class="swatch" style="background: #ef4444;" onclick="selectColor('#ef4444', 'Coral Red', this)"></div>
+                <!-- Interactive Display Controls -->
+                <div class="screen-modes">
+                    <button class="mode-btn active" onclick="updateScreenMode('heart', this)">❤️ Heart</button>
+                    <button class="mode-btn" onclick="updateScreenMode('spo2', this)">🫁 SpO2</button>
+                    <button class="mode-btn" onclick="updateScreenMode('sos', this)">🚨 SOS</button>
+                </div>
+
+                <div class="selected-summary" id="sizeDisplay">Selected: Teal Green / Medium (165-190 mm)</div>
+            </div>
+
+            <!-- Right Side: Customization & Checkout Panel -->
+            <div class="product-panel">
+                <div class="rating-row">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-text">4.9/5 (128 reviews)</span>
+                </div>
+
+                <h1>OMNI BAND Smart Safety Wristband</h1>
+                <p class="subtitle">Designed for health tracking, rapid location identification, and instant SOS alert transmission.</p>
+
+                <div class="price-row">
+                    <span class="current-price">Dhs 249</span>
+                    <span class="old-price">Dhs 320</span>
+                    <span class="save-badge">Save 22%</span>
+                </div>
+
+                <!-- Color Selector -->
+                <div class="option-group">
+                    <div class="option-header">
+                        <label>Strap Color:</label>
+                        <span id="colorLabel" class="option-value">Teal Green</span>
+                    </div>
+                    <div class="swatches">
+                        <div class="swatch active" style="--swatch-color: #0d9488;" onclick="selectColor('#0d9488', 'Teal Green', this)"></div>
+                        <div class="swatch" style="--swatch-color: #1e293b;" onclick="selectColor('#1e293b', 'Midnight Black', this)"></div>
+                        <div class="swatch" style="--swatch-color: #f1f5f9;" onclick="selectColor('#f1f5f9', 'Glacier White', this)"></div>
+                        <div class="swatch" style="--swatch-color: #ef4444;" onclick="selectColor('#ef4444', 'Signal Red', this)"></div>
+                    </div>
+                </div>
+
+                <!-- Size Selector -->
+                <div class="option-group">
+                    <div class="option-header">
+                        <label>Band Size:</label>
+                        <span id="sizeLabel" class="option-value">Medium (165-190 mm)</span>
+                    </div>
+                    <div class="sizes">
+                        <div class="size-btn" onclick="selectSize('Small', '140-165 mm', this)">
+                            <strong>Small</strong>
+                            <span>140–165 mm</span>
+                        </div>
+                        <div class="size-btn active" onclick="selectSize('Medium', '165-190 mm', this)">
+                            <strong>Medium</strong>
+                            <span>165–190 mm</span>
+                        </div>
+                        <div class="size-btn" onclick="selectSize('Large', '190-220 mm', this)">
+                            <strong>Large</strong>
+                            <span>190–220 mm</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Primary Order CTA -->
+                <button class="order-btn" onclick="goToOrderPage()">
+                    <span>Order Now</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+
+                <div class="guarantee-row">
+                    <span>🔒 Safe Checkout</span>
+                    <span>🚚 Free UAE Shipping</span>
+                    <span>🛡️ 2-Year Warranty</span>
                 </div>
             </div>
 
-            <!-- Size Selection -->
-            <div class="option-group">
-                <div class="option-label">Choose Band Size</div>
-                <div class="sizes">
-                    <div class="size-btn active" onclick="selectSize('Small (140 mm)', this)">
-                        Small
-                        <small>140 - 165 mm</small>
-                    </div>
-                    <div class="size-btn" onclick="selectSize('Medium (180 mm)', this)">
-                        Medium
-                        <small>165 - 190 mm</small>
-                    </div>
-                    <div class="size-btn" onclick="selectSize('Large (210 mm)', this)">
-                        Large
-                        <small>190 - 220 mm</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Order Button -->
-            <button class="order-btn" id="orderBtn" onclick="goToOrderPage()">Order Now</button>
         </div>
-    </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
